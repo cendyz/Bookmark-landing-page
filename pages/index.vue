@@ -9,7 +9,8 @@
 					type="text"
 					id="country"
 					class="ml-[3rem] outline-none w-full placeholder:text-gray-300"
-					placeholder="Search for a country..." />
+					placeholder="Search for a country..."
+					v-model="inputData.country" />
 			</div>
 			<div :class="boxesStyles" class="px-[2.5rem] mt-[6rem] inline-flex relative font-w600 w-[23rem]">
 				<button class="flex w-full justify-between items-center" type="button" @click="isOpen = !isOpen">
@@ -38,14 +39,14 @@
 		</section>
 		<section>
 			<div
-				v-for="(item, index) in loopedRegions.slice(0, 3)"
+				v-for="(item, index) in loopedRegions"
 				:key="index"
 				class="w-[90%] mx-auto mt-[4rem] bg-gray-100 myShadow rounded-xl overflow-hidden">
 				<img :src="item.flags.png" :alt="`${item.name} flag`" class="block w-full" />
-				<div class="p-[3rem] pb-[5rem] text-[1.6rem]">
+				<div class="p-[3rem] pb-[5rem] text-[1.6rem] border-t-2 border-gray-200">
 					<h2 class="font-w800 text-[2.3rem] mb-[1.8rem]">{{ item.name }}</h2>
 					<div>
-						<p><span :class="spanStyles">Population:</span> {{ item.population }}</p>
+						<p><span :class="spanStyles">Population:</span> {{ formatNumber(item.population) }}</p>
 						<p class="my-[.5rem]"><span :class="spanStyles">Region:</span> {{ item.region }}</p>
 						<p><span :class="spanStyles">Capital:</span> {{ item.capital }}</p>
 					</div>
@@ -60,13 +61,25 @@ import useCountryStore from '~/store/countries'
 
 const store = useCountryStore()
 
+const filteredCountries = computed(() => {
+	return data.value.filter(el => {
+		const matchedRegion = actualRegion.value === 'Filter by Region' || el.region === actualRegion.value
+		const InputRegion = inputData.value.country
+			? el.name.toLowerCase().startsWith(inputData.value.country.toLowerCase())
+			: true
+
+		return matchedRegion && InputRegion
+	})
+})
+
 const data = ref(store.data)
 const setRegions = new Set<string>()
 const isOpen = ref<boolean>(false)
 const actualRegion = ref<string>('Filter by Region')
-// console.log(data)
-const startRegions = ref(data.value)
-const loopedRegions = computed(() => startRegions.value)
+const loopedRegions = computed(() => filteredCountries.value)
+const inputData = ref({
+	country: '',
+})
 
 for (let i = 0; i < data.value.length; i++) {
 	setRegions.add(data.value[i].region)
@@ -76,10 +89,10 @@ const arrRegions: string[] = Array.from(setRegions)
 
 const changeRegion = (item: string): void => {
 	actualRegion.value = item
-	startRegions.value = data.value.filter(el => el.region === actualRegion.value)
-	console.log(data.value);
 	isOpen.value = false
 }
+
+const formatNumber = (num: number): string => num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
 
 const spanStyles = 'font-w600'
 const boxesStyles = 'bg-gray-100  py-[1.5rem] rounded-xl myShadow  items-center'
