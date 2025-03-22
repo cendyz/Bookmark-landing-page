@@ -65,7 +65,8 @@ const setRegions = new Set<string>()
 const isOpen = ref<boolean>(false)
 const actualRegion = ref<string>('Filter by Region')
 // console.log(data)
-const loopedRegions = computed(() => data.value)
+const startRegions = ref(data.value)
+const loopedRegions = computed(() => startRegions.value)
 
 for (let i = 0; i < data.value.length; i++) {
 	setRegions.add(data.value[i].region)
@@ -75,7 +76,7 @@ const arrRegions: string[] = Array.from(setRegions)
 
 const changeRegion = (item: string): void => {
 	actualRegion.value = item
-	data.value = data.value.filter(el => el.region === actualRegion.value)
+	startRegions.value = data.value.filter(el => el.region === actualRegion.value)
 	console.log(data.value);
 	isOpen.value = false
 }
