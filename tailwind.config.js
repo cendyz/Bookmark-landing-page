@@ -4,6 +4,9 @@ export default {
 	content: [],
 	theme: {
 		extend: {
+      container: {
+        center: true
+      },
 			fontFamily: {
 				sans: ['Nunito Sans', 'sans-serif'],
 			},
