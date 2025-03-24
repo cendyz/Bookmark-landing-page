@@ -1,7 +1,7 @@
 <template>
 	<main class="p-[2rem] container bg-gray-200 dark:bg-gray-500">
-		<section>
-			<div :class="boxesStyles" class="px-[3rem] flex dark:bg-gray-400">
+		<section class="lg:flex lg:items-center lg:justify-between lg:pt-[3rem]">
+			<div :class="boxesStyles" class="px-[3rem] flex dark:bg-gray-400 lg:w-[42rem]">
 				<label for="country" class="flex items-center cursor-pointer"
 					><Icon name="ci:search-magnifying-glass" class="text-black text-[2rem] dark:text-gray-50"
 				/></label>
@@ -14,7 +14,7 @@
 			</div>
 			<div
 				:class="boxesStyles"
-				class="px-[2.5rem] mt-[6rem] inline-flex relative font-w600 w-[23rem] dark:bg-gray-400 dark:text-gray-50">
+				class="px-[2.5rem] mt-[6rem] inline-flex relative font-w600 w-[23rem] dark:bg-gray-400 dark:text-gray-50 lg:mt-0">
 				<button class="flex w-full justify-between items-center" type="button" @click="isOpen = !isOpen">
 					{{ actualRegion }}
 					<Icon
@@ -39,13 +39,13 @@
 				</Transition>
 			</div>
 		</section>
-		<section class="md:grid md:grid-cols-2 md:gap-y-[5rem]">
+		<section class="md:grid md:grid-cols-2 md:gap-y-[5rem] md:pt-[5rem] lg:grid-cols-3 xl:grid-cols-4">
 			<div
 				v-for="(item, index) in loopedRegions"
 				:key="index"
 				class="w-[83%] mx-auto mt-[4rem] bg-gray-100 myShadow rounded-xl overflow-hidden dark:bg-gray-400 md:mt-0">
 				<img :src="item.flags.png" :alt="`${item.name} flag`" class="block w-full" />
-				<div class="p-[3rem] pb-[5rem] text-[1.6rem] border-t-2 border-gray-200 dark:border-gray-400 dark:text-gray-50">
+				<div class="p-[3rem] text-[1.6rem] border-t-2 border-gray-200 dark:border-gray-400 dark:text-gray-50">
 					<h2 class="font-w800 text-[2.3rem] mb-[1.8rem]">{{ item.name }}</h2>
 					<div>
 						<p><span :class="spanStyles">Population:</span> {{ formatNumber(item.population) }}</p>
