@@ -39,11 +39,11 @@
 				</Transition>
 			</div>
 		</section>
-		<section>
+		<section class="md:grid md:grid-cols-2 md:gap-y-[5rem]">
 			<div
 				v-for="(item, index) in loopedRegions"
 				:key="index"
-				class="w-[90%] mx-auto mt-[4rem] bg-gray-100 myShadow rounded-xl overflow-hidden dark:bg-gray-400">
+				class="w-[83%] mx-auto mt-[4rem] bg-gray-100 myShadow rounded-xl overflow-hidden dark:bg-gray-400 md:mt-0">
 				<img :src="item.flags.png" :alt="`${item.name} flag`" class="block w-full" />
 				<div class="p-[3rem] pb-[5rem] text-[1.6rem] border-t-2 border-gray-200 dark:border-gray-400 dark:text-gray-50">
 					<h2 class="font-w800 text-[2.3rem] mb-[1.8rem]">{{ item.name }}</h2>
@@ -115,6 +115,18 @@ const formatNumber = (num: number): string => num.toString().replace(/\B(?=(\d{3
 
 const spanStyles = 'font-w600'
 const boxesStyles = 'bg-gray-100  py-[1.5rem] rounded-xl myShadow  items-center'
+
+watch(
+	() => store.isLight,
+	newValue => {
+		if (newValue) {
+			document.body.style.backgroundColor = 'hsl(0, 0%, 98%)'
+			console.log('test')
+		} else {
+			document.body.style.backgroundColor = 'hsl(207, 26%, 17%)'
+		}
+	}
+)
 </script>
 
 <style lang="scss">
@@ -122,12 +134,6 @@ const boxesStyles = 'bg-gray-100  py-[1.5rem] rounded-xl myShadow  items-center'
 
 body {
 	background-color: hsl(0, 0%, 98%); // 200
-}
-
-@media (prefers-color-scheme: dark) {
-	body {
-		background-color: hsl(207, 26%, 17%); // 200
-	}
 }
 
 .filterMenu-enter-active,
