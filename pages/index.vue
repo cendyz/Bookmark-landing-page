@@ -13,9 +13,11 @@
 					v-model="inputData.country" />
 			</div>
 			<div
+				ref="buttonRef"
 				:class="boxesStyles"
-				class="px-[2.5rem] mt-[6rem] inline-flex relative font-w600 w-[23rem] dark:bg-gray-400 dark:text-gray-50 lg:mt-0">
-				<button class="flex w-full justify-between items-center" type="button" @click="isOpen = !isOpen">
+				@click="isOpen = !isOpen"
+				class="mt-[6rem] inline-flex relative font-w600 w-[23rem] dark:bg-gray-400 cursor-pointer dark:text-gray-50 lg:mt-0">
+				<button class="px-[2.5rem] flex w-full justify-between items-center" type="button">
 					{{ actualRegion }}
 					<Icon
 						name="material-symbols:arrow-downward-alt"
@@ -61,22 +63,6 @@
 <script setup lang="ts">
 import useCountryStore from '~/store/countries'
 
-const func = (a: string): string => {
-	let newArr = a.split(' ').map(el => el.split(''))
-	const reg = /[A-Za-z]/
-	for (let i = 0; i < newArr.length; i++) {
-		if (reg.test(newArr[i][0]) && newArr[i][0] !== ' ') {
-			newArr[i].push(newArr[i][0])
-			newArr[i].push('ay')
-			newArr[i].shift()
-		}
-	}
-
-	return newArr.map(el => el.join('')).join(' ')
-}
-
-console.log(func('Pig latin is cool !'))
-
 const store = useCountryStore()
 
 const filteredCountries = computed(() => {
@@ -98,7 +84,7 @@ const loopedRegions = computed(() => filteredCountries.value)
 const inputData = ref({
 	country: '',
 })
-console.log(data.value)
+const buttonRef = ref()
 
 for (let i = 0; i < data.value.length; i++) {
 	setRegions.add(data.value[i].region)
@@ -110,6 +96,22 @@ const changeRegion = (item: string): void => {
 	actualRegion.value = item
 	isOpen.value = false
 }
+const handleCloseOutside = (e: Event): void => {
+	if (buttonRef.value && !buttonRef.value.contains(e.target)) {
+		isOpen.value = false
+	}
+}
+
+watch(
+	() => isOpen.value,
+	newValue => {
+		if (newValue) {
+			document.addEventListener('click', handleCloseOutside)
+		} else {
+			document.removeEventListener('click', handleCloseOutside)
+		}
+	}
+)
 
 const formatNumber = (num: number): string => num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
 

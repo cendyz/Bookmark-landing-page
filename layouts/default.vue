@@ -1,5 +1,5 @@
 <template>
-	<nav class="bg-gray-100 myShadow dark:bg-gray-400">
+	<nav class="bg-gray-100 myShadow dark:bg-gray-400 relative">
 		<div class="px-[2rem] py-[4rem] flex justify-between items-center container">
 			<h1 class="font-w800 text-[1.5rem] dark:text-gray-50">Where in the world?</h1>
 			<button class="flex items-center gap-x-[1rem]" type="button" @click="changeTheme">
