@@ -62,8 +62,8 @@ definePageMeta({
 
 const route = useRoute()
 const store = useCountryStore()
+const actualCountry = computed(() => store.data.filter(el => el.area == route.params.country))
 
-const actualCountry = computed(() => store.data.filter(el => el.name === route.params.country))
 const check = actualCountry.value[0].borders
 const actualBorders = computed(() => store.data.filter(el => check?.includes(el.alpha3Code)))
 const formatNumber = (num: number): string => num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
