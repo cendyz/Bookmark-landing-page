@@ -41,12 +41,14 @@
 				</Transition>
 			</div>
 		</section>
-		<section class="md:grid md:grid-cols-2 md:gap-y-[5rem] md:pt-[5rem] lg:grid-cols-3 xl:grid-cols-4">
+		<section class="md:grid md:grid-cols-2 md:gap-[3rem] md:pt-[5rem] lg:grid-cols-3 xl:grid-cols-4">
 			<div
 				v-for="(item, index) in loopedRegions"
 				:key="index"
-				class="w-[83%] mx-auto mt-[4rem] bg-gray-100 myShadow rounded-xl overflow-hidden dark:bg-gray-400 md:mt-0">
-				<img :src="item.flags.png" :alt="`${item.name} flag`" class="block w-full" />
+				class="w-[83%] mx-auto mt-[4rem] bg-gray-100 myShadow rounded-xl overflow-hidden dark:bg-gray-400 md:m-0 md:w-full">
+				<RouterLink :to="`${item.name}/`">
+					<img :src="item.flags.png" :alt="`${item.name} flag`" class="block w-full h-[22rem]" />
+				</RouterLink>
 				<div class="p-[3rem] text-[1.6rem] border-t-2 border-gray-200 dark:border-gray-400 dark:text-gray-50">
 					<h2 class="font-w800 text-[2.3rem] mb-[1.8rem]">{{ item.name }}</h2>
 					<div>
@@ -96,7 +98,8 @@ const changeRegion = (item: string): void => {
 	actualRegion.value = item
 	isOpen.value = false
 }
-const handleCloseOutside = (e: Event): void => {
+
+const handleMenuClickOutside = (e: Event): void => {
 	if (buttonRef.value && !buttonRef.value.contains(e.target)) {
 		isOpen.value = false
 	}
@@ -106,9 +109,9 @@ watch(
 	() => isOpen.value,
 	newValue => {
 		if (newValue) {
-			document.addEventListener('click', handleCloseOutside)
+			document.addEventListener('click', handleMenuClickOutside)
 		} else {
-			document.removeEventListener('click', handleCloseOutside)
+			document.removeEventListener('click', handleMenuClickOutside)
 		}
 	}
 )
@@ -123,7 +126,6 @@ watch(
 	newValue => {
 		if (newValue) {
 			document.body.style.backgroundColor = 'hsl(0, 0%, 98%)'
-			console.log('test')
 		} else {
 			document.body.style.backgroundColor = 'hsl(207, 26%, 17%)'
 		}
