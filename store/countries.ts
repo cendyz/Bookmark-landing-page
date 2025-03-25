@@ -1,12 +1,16 @@
 import { defineStore } from 'pinia'
-const countriesData = await import ('assets/data/data.json')
 
 const useCountryStore = defineStore('countries', {
 	state: () => ({
-		data: countriesData.default,
-		isLight: true
+		data: [] as any[],
+		isLight: true,
 	}),
+	actions: {
+		async loadCountries() {
+			const countriesData = await import('assets/data/data.json')
+			this.data = countriesData.default
+		},
+	},
 })
-
 
 export default useCountryStore
