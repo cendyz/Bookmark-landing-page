@@ -13,7 +13,7 @@
 				<img
 					:src="actualCountry[0].flags.png"
 					:alt="`${actualCountry[0].name} flag`"
-					class="w-full h-[23rem] myShadow2 max-w-[35rem] md:max-w-[40rem] md:h-auto" />
+					class="w-full h-[23rem] myShadow2 max-w-[35rem] md:max-w-[40rem] xl:max-w-[50rem] md:h-auto" />
 
 				<div class="lg:flex lg:flex-col lg:w-[50%] xl:w-[60rem]">
 					<h1 class="font-w800 mt-[5rem] text-[2.5rem] lg:mt-0 lg:text-[3.5rem] lg:leading-[1]">
