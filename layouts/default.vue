@@ -1,6 +1,5 @@
 <template>
 	<nav class="bg-gray-100 myShadow dark:bg-gray-400 relative">
-		
 		<div class="px-[2rem] py-[4rem] flex justify-between items-center container">
 			<RouterLink to="/" class="font-w800 text-[1.5rem] dark:text-gray-50"> Where in the world? </RouterLink>
 			<button class="flex items-center gap-x-[1rem]" type="button" @click="changeTheme">
@@ -23,6 +22,17 @@ const changeTheme = (): void => {
 	store.isLight = !store.isLight
 	document.documentElement.classList.toggle('dark')
 }
+
+watch(
+	() => store.isLight,
+	newValue => {
+		if (!newValue) {
+			document.body.style.backgroundColor = 'hsl(207, 26%, 17%)'
+		} else {
+			document.body.style.backgroundColor = 'hsl(0, 0%, 100%)'
+		}
+	}
+)
 </script>
 
 <style lang="scss">
