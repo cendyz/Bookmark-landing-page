@@ -9,7 +9,7 @@
 			<h1 class="font-w800 mt-[5rem] text-[2.5rem]">{{ actualCountry[0].name }}</h1>
 			<div class="mt-[2.5rem] grid gap-y-[1.3rem]">
 				<p><span>Native name:</span> {{ actualCountry[0].nativeName }}</p>
-				<p><span>Population:</span> {{ actualCountry[0].population }}</p>
+				<p><span>Population:</span> {{ formatNumber(actualCountry[0].population) }}</p>
 				<p><span>Region:</span> {{ actualCountry[0].region }}</p>
 				<p><span>Sub Region:</span> {{ actualCountry[0].subregion }}</p>
 				<p><span>Capital: </span> {{ actualCountry[0].capital }}</p>
@@ -21,13 +21,13 @@
 			</div>
 			<div>
 				<h2 class="capitalize font-w600">border countries:</h2>
-				<div class="flex justify-between gap-x-[1rem] mt-[1.5rem]">
+				<div class="flex flex-wrap items-center justify-center gap-[1rem] mt-[1.5rem]">
 					<RouterLink
-						to="/"
-						v-for="(item, index) in actualCountry[0].borders"
+						:to="`/${item.name}`"
+						v-for="(item, index) in actualBorders"
 						:key="index"
-						class="py-[.3rem] text-center bg-gray-50 myShadow2 w-full rounded-md text-[1.3rem]"
-						>link</RouterLink
+						class="py-[.3rem] text-center bg-gray-50 myShadow2 rounded-md text-[1.3rem] w-[30%]"
+						>{{ item.name }}</RouterLink
 					>
 				</div>
 			</div>
@@ -45,7 +45,9 @@ const route = useRoute()
 const store = useCountryStore()
 
 const actualCountry = computed(() => store.data.filter(el => el.name === route.params.country))
-console.log(actualCountry)
+const check = actualCountry.value[0].borders
+const actualBorders = computed(() => store.data.filter(el => check?.includes(el.alpha3Code)))
+const formatNumber = (num: number): string => num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',')
 </script>
 
 <style scoped>
@@ -58,6 +60,6 @@ console.log(actualCountry)
 
 p span {
 	font-weight: 600;
-    color: hsl(207, 26%, 17%);
+	color: hsl(207, 26%, 17%);
 }
 </style>
