@@ -65,6 +65,10 @@
 <script setup lang="ts">
 import useCountryStore from '~/store/countries'
 
+onMounted(async () => {
+  await store.loadCountries()
+})
+
 const store = useCountryStore()
 
 const filteredCountries = computed(() => {
