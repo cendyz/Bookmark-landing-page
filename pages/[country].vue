@@ -13,9 +13,9 @@
 				<img
 					:src="actualCountry[0].flags.png"
 					:alt="`${actualCountry[0].name} flag`"
-					class="w-full h-[23rem] myShadow2 max-w-[35rem] md:max-w-[40rem] xl:max-w-[50rem] md:h-auto" />
+					class="w-full h-[23rem] myShadow2 max-w-[35rem] md:max-w-[40rem] xl:max-w-[50%] md:h-auto" />
 
-				<div class="lg:flex lg:flex-col lg:w-[50%] xl:w-[60rem]">
+				<div class="lg:flex lg:flex-col lg:w-[50%] xl:w-[50rem]">
 					<h1 class="font-w800 mt-[5rem] text-[2.5rem] lg:mt-0 lg:text-[3.5rem] lg:leading-[1]">
 						{{ actualCountry[0].name }}
 					</h1>
@@ -34,7 +34,7 @@
 						</div>
 					</div>
 					<div class="lg:flex lg:items-start lg:gap-x-[1rem]">
-						<h2 class="capitalize font-w600 xl:w-[13rem]">border countries:</h2>
+						<h2 class="capitalize font-w600">border countries:</h2>
 						<div
 							class="flex flex-wrap items-center justify-start lg:items-start gap-[1rem] mt-[1.5rem] lg:mt-0 lg:flex-wrap">
 							<NuxtLink
