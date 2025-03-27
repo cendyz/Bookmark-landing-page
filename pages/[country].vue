@@ -37,13 +37,13 @@
 						<h2 class="capitalize font-w600 xl:w-[13rem]">border countries:</h2>
 						<div
 							class="flex flex-wrap items-center justify-start lg:items-start gap-[1rem] mt-[1.5rem] lg:mt-0 lg:flex-wrap">
-							<RouterLink
+							<NuxtLink
 								v-if="actualBorders.length"
 								:to="`/${item.area}`"
 								v-for="(item, index) in actualBorders"
 								:key="index"
 								class="py-[.3rem] text-center px-[1rem] xl:w-[10rem] bg-gray-50 dark:bg-gray-400 myShadow rounded-md text-[1.3rem] w-fit"
-								>{{ item.name }}</RouterLink
+								>{{ item.name }}</NuxtLink
 							>
 							<p v-else class="text-left">None</p>
 						</div>
