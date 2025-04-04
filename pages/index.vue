@@ -47,7 +47,7 @@
 				:key="index"
 				class="w-[83%] mx-auto mt-[4rem] bg-gray-100 myShadow rounded-xl overflow-hidden dark:bg-gray-400 md:m-0 md:w-full">
 				<NuxtLink :to="`/${item.area}`" prefetch>
-					<img :src="item.flags.png" :alt="`${item.name} flag`" class="block w-full h-[18rem]" />
+					<img :src="item.flags.png" :alt="`${item.name} flag`" class="block w-full h-[18rem] 2xl:h-[22rem]" />
 				</NuxtLink>
 				<div class="p-[3rem] text-[1.6rem] border-t-2 border-gray-200 dark:border-gray-400 dark:text-gray-50">
 					<h2 class="font-w800 text-[2.3rem] mb-[1.8rem]">{{ item.name }}</h2>
